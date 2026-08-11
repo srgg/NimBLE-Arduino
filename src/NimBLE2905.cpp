@@ -27,7 +27,7 @@
 #else
     // Ensure the value is within a valid range
     #if NIMBLE_MAX_AGGREGATE_FORMAT_DESCRIPTORS < 1 || NIMBLE_MAX_AGGREGATE_FORMAT_DESCRIPTORS > 255
-        #error "NIMBLE_MAX_AGGREGATE_FORMAT_DESCRIPTORS must be between 1 and 128"
+        #error "NIMBLE_MAX_AGGREGATE_FORMAT_DESCRIPTORS must be between 1 and 255"
     #endif
 #endif
 
