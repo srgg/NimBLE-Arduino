@@ -311,7 +311,7 @@ bool NimBLEServer::start() {
     // resetGATT() registered the hidden services too; hide them again now that they have handles.
     for (const auto& svc : m_svcVec) {
         if (svc->getRemoved() == NIMBLE_ATT_REMOVE_HIDE) {
-            ble_gatts_svc_set_visibility(svc->getHandle(), 0);
+            setServiceVisibility(svc->getHandle(), false);
         }
     }
 
@@ -971,7 +971,7 @@ void NimBLEServer::addService(NimBLEService* service) {
     // Hidden but still registered: shown in place, no reset needed. A pending reset may still change
     // the database under it, so the service waits for that reset instead.
     if (service->getRemoved() == NIMBLE_ATT_REMOVE_HIDE && service->getHandle() != 0 && !m_svcChanged &&
-        ble_gatts_svc_set_visibility(service->getHandle(), 1) == 0) {
+        setServiceVisibility(service->getHandle(), true) == 0) {
         service->setRemoved(0);
         sendServiceChangedIndication();
         return;
